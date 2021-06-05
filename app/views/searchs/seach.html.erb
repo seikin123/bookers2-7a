@@ -1,0 +1,11 @@
+<p id="notice"></p>
+<div class="mx-auto" style="width: 1200px;">
+  <% if @range == "User" %>
+    <h2>Users search</h2>
+      <%= render 'users/index', user: @users %> <%# 検索対象がUserのとき、ユーザーを一覧表示 %>
+  <% else %>
+    <h2>Book search</h2>
+    <%= render 'books/index', book: @books %> <%# 検索対象がBookのとき、投稿を一覧表示 %>
+<% end %>
+</div>
+

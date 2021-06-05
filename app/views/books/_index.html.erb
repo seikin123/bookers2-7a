@@ -1,0 +1,28 @@
+
+    <table class="table table-hover table-invers">
+      <thead>
+        <th></th>
+          <th>title</th>
+            <th>opinion</th>
+              <th colspan="3"></th>
+                <% @ranks.each do |book| %>
+                <tr><td>
+                    <%= link_to user_path(book.user) do %>
+                    <%= attachment_image_tag book.user, :profile_image, size: "50x50",fallback: "no_image.jpg"%>
+                    <% end %></td>
+                    <td><%= link_to book.title, book_path(book.id) %></td>
+                    <td><%= book.body %></td>
+                    <td id="favorite_buttons_<%= book.id %>">
+                      <%= render 'favorites/favorite', book: book %>
+                    </td>
+                    <td><%= "コメント：#{book.book_comments.count}" %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </tr>
+      </thead>
+    </tbody>
+  </table>
+
+

@@ -1,0 +1,32 @@
+<p id="notice"></p>
+<div class='col-md-10 offset-md-1'>
+  <h3>Follow Users</h3>
+    <% if @users.empty? %>
+        <span>ユーザーはいません</span>
+    <% else %>
+    <table class='table table-hover table-inverse'>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th></th>
+          <th></th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+        <tbody>
+            <% @user.following_user.where.not(id: current_user.id).each do |user| %>
+          <tr>
+            <td><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg" , size:"40x40" %></td>
+            <td><%= "#{user.name}" %></td>
+            <td><%="フォロー数:#{user.follower.count}" %></td>
+            <td><%= "フォロワー数:#{user.followed.count}" %></td>
+            <td><%= link_to "show", user_path(user) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </tr>
+  </table>
+  <% end %>
+</div>

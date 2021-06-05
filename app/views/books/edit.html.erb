@@ -1,0 +1,29 @@
+
+
+<div class='container'>
+  <%= render 'books/error', model: @book %>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+    <table>
+          <%= form_with model:@book, local: true do |f| %>
+        <div class="form-group">
+          <label>Title</label>
+          <%= f.text_field :title, class:"form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>Opinion</label>
+          <%= f.text_area :body, class:"form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit btn: "Update Book", class:"btn btn-success col-xs-12" %>
+        </div>
+            <% end %>
+        <td class="show"><%= link_to "Show", book_path(@book.id) %></td>
+        <td>|</td>
+        <td class="back"><%= link_to "Back", books_path %></td>
+    </table>
+  </div>
+</div>

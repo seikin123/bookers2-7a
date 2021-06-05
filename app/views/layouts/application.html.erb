@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Bookers2</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> 
+  </head>
+
+<body>
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/"><span>Bookers</span></a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li><a class="fas fa-home nav-link text-light" href="<%= user_path(current_user.id) %>"> home</a></li>
+          <li><a class="fas fa-users nav-link text-light" href="/users"> Users</a></li>
+          <li><a class="fas fa-book-open nav-link text-light" href="/books"> Books</a></li>
+          <li><%= link_to "logout", destroy_user_session_path, class:"fas fa-sign-out-alt nav-link text-light",method: :delete %></li>
+        <% else %>
+          <li><a class="fas fa-home nav-link text-light" href="/"> Home</a></li>
+          <li><a class="fas fa-link nav-link text-light" href="/home/about"> About</a></li>
+          <li><a class="fas fa-user-plus nav-link text-light" href="/users/sign_up"> sign up</a></li>
+          <li><a class="fas fa-sign-in-alt nav-link text-light" href="/users/sign_in"> login</a></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <% if flash[:alert] %>
+    <div class="text-success">
+      <p class="alert"><%= alert %></p>
+    </div>
+      <% end %>
+      <% if flash[:notice] %>
+    <div class="text-success">
+      <p class="notice"><%= notice %></p>
+    </div>
+      <% end %>
+</header>
+
+    <%= render 'layouts/form' %>
+  <%= yield %>
+    <footer class="footer">
+      <div class='container mt-5'>
+        <div class='row'>
+          <div class='mx-auto'>
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

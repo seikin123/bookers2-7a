@@ -1,0 +1,11 @@
+    <p id="notice"></p>
+    <% if model.errors.any? %>
+  <div id="error_explanation">
+    <h3 class="text-danger"><%= pluralize(model.errors.count,"error") %> prohibited this product from being saved:</h3>
+
+  <ul><% model.errors.full_messages.each do |message| %>
+    <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+    <% end %>
