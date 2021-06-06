@@ -21,7 +21,9 @@ end
   def index
     @books = Book.all
     @booknew = Book.new
-    @ranks = Book.last_week
+    to =  Time.current.at_beginning_of_day
+    from = (to - 6.day).at_end_of_day
+    @ranks = Book.joins(:favorites).where(favorites: { created_at: from...to}).group(:id).order(Arel.sql("count(*) desc"))
     @user = current_user
   end
 

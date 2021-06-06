@@ -14,9 +14,10 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   def self.last_week # メソッド名
-    # to  = Time.current.at_beginning_of_day
-    # from  = (Time.current.at_beginning_of_day - 6.day).at_end_of_day
-    Book.joins(:favorites).where(favorites: { created_at: (Time.current.at_beginning_of_day - 6.day).at_end_of_day}).group(:id).order("count(*) desc")
+    to =  Time.current.at_beginning_of_day
+    from = (to - 6.day).at_end_of_day
+    Book.joins(:favorites).where(favorites: { created_at: from...to}).group(:id).order(Arel.sql("count(*) desc"))
+    #Bookとfavoritesを内部結合
   end
 
 
